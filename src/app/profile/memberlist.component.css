@@ -1,0 +1,129 @@
+
+.dollar-logo-wrapper {
+    width: 20%;
+    height: 25%;
+    position: relative;    
+    margin:auto;
+    top:0;
+
+}
+
+.dollar-logo {
+    margin: auto auto;
+    height: 80%;
+    width:100%;
+}
+
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    font:200;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.label1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: large;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color:rgb(54, 54, 54);
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input {
+    height: 55px;
+    width:98%;
+    font-size: 25px;
+}
+
+button {
+    width:45%;
+    height:55px;
+    background-color: white;
+    border-color: grey;
+    color: grey;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+.btn-send {
+    background-color: rgb(48, 110, 202);
+    margin-left: 10%;
+    color:white;
+}
+
+.button-footer {
+    position:relative;
+    margin-top: 70px;
+    bottom: 20px;
+}
+
+table {
+    caption-side: bottom;
+    border-collapse: collapse;
+  }
+
+.memberlist {
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid grey;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid grey;
+    text-align: left;
+    padding-left:20px;
+    font-weight:600;
+    font-size: 18px;
+    color: grey;
+    
+}
+td {
+    cursor:pointer;
+}
+
+tr {
+    line-height : 60px;
+}
+
+.table-balance {
+    text-align: center;
+}
+
+.profile-title {
+    margin-left:20%;
+    margin-top: 3%;
+    font-weight: 400;
+    color: rgb(44, 44, 44);
+}
+
+.sub-nav-title {
+    position: relative;
+    padding-top: 3%;
+    padding-left: 17%;
+    font-weight:500;
+    font-size: 22px;
+    color: grey;
+
+}
+
+.sub-nav-balance {
+    position: relative;
+    padding-left: 17%;
+    font-weight:300;
+    font-size: 50px;
+    color: turquoise;
+
+}

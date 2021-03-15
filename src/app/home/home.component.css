@@ -1,0 +1,31 @@
+.sub-nav-title {
+    position: relative;
+    padding-top: 4%;
+    padding-left: 17%;
+    font-weight:400;
+    font-size: 50px;
+    color: rgb(78, 78, 78);
+
+}
+
+.row-right{
+    display: inline-block;
+    margin-left:20%;
+    margin-top:3%;
+    margin-right:5%;
+    width:10%
+}
+
+.row-left{
+    display: inline-block;
+}
+
+label {
+    color: rgb(160, 160, 160);
+}
+
+h1 {
+    font-weight: 400;
+    color:rgb(92, 91, 91);
+    font-size: 30px;
+}

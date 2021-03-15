@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+a { cursor: pointer; }
+
+.app-container {
+    min-height: 320px;
+    overflow: hidden;
+}
+
+.btn-delete-user {
+    width: 40px;
+    text-align: center;
+    box-sizing: content-box;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } 
+
+.sub-nav {
+    width:91%;
+    height:210px;
+    background-color: rgb(245, 243, 243);
+    margin: 0 auto;
+}
+
+

@@ -1,0 +1,48 @@
+<div class="sub-nav">
+    <div class="sub-nav-title">My Balance</div>
+    <div class="sub-nav-balance ">${{sender.balance}}</div>
+</div>
+<h1 class='profile-title'>Users</h1>
+<table class="memberlist">
+    <thead>
+        <tr>
+            <th style="width: 90%">Name</th>
+            <th style="width: 10%">Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users;let ndx = index" (click)="openModal('custom-modal-1',ndx)">
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>${{user.balance}}</td>
+        </tr>
+        <tr *ngIf="!users">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<jw-modal id="custom-modal-1">
+    <div class="dollar-logo-wrapper">
+        <img class='dollar-logo' src="../../assets/images/icon_dollar.svg"  alt="dollar-logo">
+    </div>
+    <h2>Send money to {{receiver.firstName}}</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="balance" class="label1">Amount</label>
+            <input type="number" formControlName="balance" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.balance.errors }" />
+            <div *ngIf="submitted && f.balance.errors" class="invalid-feedback">
+                <div *ngIf="f.balance.errors.required">Amount is required</div>
+            </div>
+        </div>
+        <div class="form-group button-footer">
+            <button type="button" (click)="closeModal('custom-modal-1');">Cancel</button>
+            <button [disabled]="loading" class="btn-send">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Send
+            </button>
+        </div>
+    </form>
+</jw-modal>
+
