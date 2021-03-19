@@ -43,7 +43,7 @@ h1 {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    min-width: 300px;
+    min-width: 400px;
     width: 23%;
     word-wrap: break-word;
     background-color: #fff;
@@ -71,3 +71,7 @@ h1 {
     font-weight: 500;
     font-size: 23px;
 }
+
+input:invalid {
+    border-color: red;
+  }

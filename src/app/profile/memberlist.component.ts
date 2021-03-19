@@ -12,100 +12,110 @@ import { User } from '@app/_models';
  */
 
 @Component({
-  templateUrl: './memberlist.component.html',
-  styleUrls: ['./memberlist.component.css']
+    templateUrl: './memberlist.component.html',
+    styleUrls: ['./memberlist.component.css']
 })
 export class MemberlistComponent implements OnInit {
-  users = null;
-  sender: User;
-  receiver =  {firstName:"John", lastName:"Doe", balance:100, id:"100"};
-  form: FormGroup;
-  loading = false;
+    submitted = false;
+    users = null;
+    sender: User;
+    receiver = { firstName: null, lastName: null, balance: null, id: null };
+    form: FormGroup;
+    loading = false;
 
-  constructor(
-      private formBuilder: FormBuilder,
-      private accountService: AccountService, 
-      private modalService: ModalService,
-      private alertService: AlertService,
-      private route: ActivatedRoute,
-      private router: Router,
-      ) {
+
+    constructor(
+        private formBuilder: FormBuilder,
+        private accountService: AccountService,
+        private modalService: ModalService,
+        private alertService: AlertService,
+        private route: ActivatedRoute,
+        private router: Router,
+    ) {
         this.sender = this.accountService.userValue;
-      }
+    }
 
-  ngOnInit() {
-      this.form = this.formBuilder.group({
-          balance: ['', Validators.required]
-      });
-      this.accountService.getAll()
-          .pipe(first())
-          .subscribe(users => this.users = users);
-  }
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            balance: ['', Validators.required]
+        });
+        this.accountService.getAll()
+            .pipe(first())
+            .subscribe(users => this.users = users);
+    }
 
-  openModal(id: string, receiverID) {
-      this.modalService.open(id);
-      this.receiver = this.users.find(x => x.id === receiverID+1);
-      this.sender = this.users.find(x => x.id === this.sender.id);
-  }
+    openModal(id: string, receiverID) {
+        this.modalService.open(id);
+        this.form.reset();
+        Object.keys(this.form.controls).forEach(key => {
+            this.form.controls[key].setErrors(null)
+        });
+        this.receiver = this.users.find(x => x.id === receiverID + 1);
+        this.sender = this.users.find(x => x.id === this.sender.id);
+    }
 
-  closeModal(id: string) {
-      this.modalService.close(id);
-  }
+    closeModal(id: string) {
+        this.form.reset();
+        this.modalService.close(id);
+    }
 
-  get f() { return this.form.controls; }
+    get f() { return this.form.controls; }
 
-  refresh() {
-      this.accountService.getAll()
-          .pipe(first())
-          .subscribe(users => this.users = users);
-      this.receiver = this.users.find(x => x.id === this.receiver.id+1);
-      this.sender = this.users.find(x => x.id === this.sender.id);
-        
-  }
+    refresh() {
+        this.accountService.getAll()
+            .pipe(first())
+            .subscribe(users => this.users = users);
+        this.receiver = this.users.find(x => x.id === this.receiver.id + 1);
+        this.sender = this.users.find(x => x.id === this.sender.id);
 
-  onSubmit(){
-      this.modalService.close('custom-modal-1');
-    
-      let senderBalance = {
-          balance: (Number(this.sender.balance) - this.f.balance.value).toFixed(2)
-      };
-      
-      let receiverBalance = {
-          balance: (Number(this.receiver.balance) + this.f.balance.value).toFixed(2)
-      };
-      
- 
-      this.accountService.update(this.sender.id, senderBalance)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  // this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                  // this.router.navigate(['..', { relativeTo: this.route }]);
-              },
-              error => {
-                  this.alertService.error(error);
-                  this.loading = false;
-              });
-      
-      this.accountService.update(this.receiver.id, receiverBalance)
-          .pipe(first())
-          .subscribe(
-              async data => {
-                  this.alertService.success('Update successful', { keepAfterRouteChange: true });
-              },
-              error => {
-                  this.alertService.error(error);
-                  this.loading = false;
-              });
-      
-      this.accountService.getAll()
-          .pipe(first())
-          .subscribe(users => this.users = users);
+    }
 
-      this.modalService.close('custom-modal-1');
-      this.accountService.getAll()
-          .pipe(first())
-          .subscribe(users => this.users = users);
-  }
+    onSubmit() {
+        this.submitted = true;
+
+        if (this.form.invalid){
+            return;
+        }
+
+        this.modalService.close('custom-modal-1');
+
+        let senderBalance = {
+            balance: (Number(this.sender.balance) - this.f.balance.value).toFixed(2)
+        };
+
+        let receiverBalance = {
+            balance: (Number(this.receiver.balance) + this.f.balance.value).toFixed(2)
+        };
+
+        this.accountService.update(this.sender.id, senderBalance)
+            .pipe(first())
+            .subscribe(
+                data => {},
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+
+        this.accountService.update(this.receiver.id, receiverBalance)
+            .pipe(first())
+            .subscribe(
+                async data => {
+                    this.alertService.success('Update successful', { keepAfterRouteChange: true });
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+
+        this.accountService.getAll()
+            .pipe(first())
+            .subscribe(users => this.users = users);
+
+        this.modalService.close('custom-modal-1');
+        this.accountService.getAll()
+            .pipe(first())
+            .subscribe(users => this.users = users);
+
+    }
 
 }

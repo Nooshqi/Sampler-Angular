@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users;let ndx = index" (click)="openModal('custom-modal-1',ndx)">
+        <tr *ngFor="let user of users;let ndx = index" (click)="user.id!=sender.id && openModal('custom-modal-1',ndx)" >
             <td>{{user.firstName}} {{user.lastName}}</td>
             <td>${{user.balance}}</td>
         </tr>
@@ -31,7 +31,8 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="balance" class="label1">Amount</label>
-            <input type="number" formControlName="balance" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.balance.errors }" />
+            <input id='' type="number" min="0" formControlName="balance" class="form-control" oninput="this.value = 
+                !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"[ngClass]="{ 'is-invalid': submitted && f.balance.errors }" />
             <div *ngIf="submitted && f.balance.errors" class="invalid-feedback">
                 <div *ngIf="f.balance.errors.required">Amount is required</div>
             </div>

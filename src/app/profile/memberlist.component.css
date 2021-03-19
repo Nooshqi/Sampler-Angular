@@ -98,6 +98,10 @@ tr {
     line-height : 60px;
 }
 
+tbody tr:hover {
+    background-color:rgb(127, 238, 227);
+}
+
 .table-balance {
     text-align: center;
 }
